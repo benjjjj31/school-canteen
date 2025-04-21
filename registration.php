@@ -115,6 +115,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 
     <script>
+              if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/service-worker.js')
+      .then(() => console.log('Service Worker registered!'))
+      .catch((error) => console.log('Service Worker registration failed:', error));
+  }
+
         function togglePassword() {
             const pass = document.getElementById("password");
             pass.type = pass.type === "password" ? "text" : "password";
