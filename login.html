@@ -6,14 +6,14 @@
     window.OneSignalDeferred = window.OneSignalDeferred || [];
     OneSignalDeferred.push(async function(OneSignal) {
         await OneSignal.init({
-            appId: "3ec0e821-0f10-4beb-976e-c6dc3e04eeea", // Replace with your actual OneSignal App ID
+            appId: "3ec0e821-0f10-4beb-976e-c6dc3e04eeea",
         });
     });
     </script>
 
     <meta charset="UTF-8">
     <title>Login | Food Ordering</title>
-    <link rel="stylesheet" href="login.css"> <!-- Use same styling file as login -->
+    <link rel="stylesheet" href="login.css">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -90,13 +90,13 @@
 <div class="login-container">
     <h2>Welcome Back!</h2>
     <p>Please enter your login details</p>
-    <form method="POST" action="login.php"> <!-- Optional: point to backend later -->
+    <form id="loginForm"> <!-- CHANGED to use JS -->
         <input type="text" name="username" placeholder="📱 Username" required>
         <input type="password" name="password" id="password" placeholder="🔒 Password" required><br>
         <input type="checkbox" id="togglePassword" class="show-password"> Show Password<br><br>
         <button type="submit">Login</button>
     </form>
-    <p>Don't have an account? <a href="register.html">Register</a></p> <!-- Now points to HTML register -->
+    <p>Don't have an account? <a href="register.html">Register</a></p>
 </div>
 
 <script>
@@ -104,6 +104,13 @@
     document.getElementById('togglePassword').addEventListener('change', function () {
         const pwdField = document.getElementById('password');
         pwdField.type = this.checked ? 'text' : 'password';
+    });
+
+    // Redirect after login
+    document.getElementById('loginForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Stop form from submitting normally
+        // You can add checking here if needed
+        window.location.href = "menu.html"; // <-- Redirect to your menu page
     });
 </script>
 
