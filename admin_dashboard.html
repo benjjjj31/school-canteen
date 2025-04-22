@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Food Stock Management - Admin Dashboard</title>
+    <style>
+        /* Styles copied from your original */
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f4f6f9;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+        h2, h3 {
+            color: #333;
+        }
+        .form-container {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            max-width: 500px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            text-align: left;
+            margin-top: 10px;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px;
+            margin-top: 10px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .delete-btn {
+            background-color: #dc3545;
+        }
+        .delete-btn:hover {
+            background-color: #a71d2a;
+        }
+        table {
+            width: 95%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background: #fff;
+        }
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+        .inline-edit-form {
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+        }
+        .inline-input {
+            width: 60px;
+        }
+        #admin-category-nav {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+        .admin-category-btn {
+            background: #45BDEE;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .admin-category-btn:hover {
+            background: #1974D2;
+        }
+        .admin-section {
+            display: none;
+        }
+        .admin-section.active {
+            display: block;
+        }
+        .center-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: center;
+        }
+        .center-table th, .center-table td {
+            padding: 10px;
+            text-align: center;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Admin - Food Stock Management</h2>
+
+<div id="admin-category-nav">
+    <button class="admin-category-btn" data-category="rice-meals">Rice Meals</button>
+    <button class="admin-category-btn" data-category="sandwiches">Sandwiches</button>
+    <button class="admin-category-btn" data-category="steamed-merienda">Steamed / Merienda</button>
+    <button class="admin-category-btn" data-category="cup-noodles">Cup Noodles</button>
+    <button class="admin-category-btn" data-category="drinks">Drinks</button>
+    <button class="admin-category-btn" data-category="ice-candy">Ice Candy</button>
+</div>
+
+<div class="form-container">
+    <form method="POST">
+        <label>Food Name:</label>
+        <input type="text" name="food" required>
+
+        <label>Quantity:</label>
+        <input type="number" name="quantity" required min="0">
+
+        <label>Stock:</label>
+        <input type="number" name="stock" required min="1">
+
+        <label>Category:</label>
+        <select name="category" required>
+            <option value="rice-meals">Rice Meals</option>
+            <option value="sandwiches">Sandwiches</option>
+            <option value="steamed-merienda">Steamed / Merienda</option>
+            <option value="cup-noodles">Cup Noodles</option>
+            <option value="drinks">Drinks</option>
+            <option value="ice-candy">Ice Candy</option>
+        </select>
+
+        <button type="submit" name="add">Add Food Item</button>
+    </form>
+</div>
+
+<!-- Example Category Sections -->
+
+<section id="rice-meals" class="admin-section active">
+    <h3>Rice Meals</h3>
+    <table>
+        <tr><th>Food</th><th>Quantity</th><th>Stock</th><th>Actions</th></tr>
+        <tr>
+            <td>Example Rice Meal</td>
+            <td>10</td>
+            <td>50</td>
+            <td>
+                <button class="delete-btn">Delete</button>
+            </td>
+        </tr>
+    </table>
+</section>
+
+<section id="sandwiches" class="admin-section">
+    <h3>Sandwiches</h3>
+    <table>
+        <tr><th>Food</th><th>Quantity</th><th>Stock</th><th>Actions</th></tr>
+        <!-- Sandwich items here -->
+    </table>
+</section>
+
+<!-- Repeat for other categories -->
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const buttons = document.querySelectorAll(".admin-category-btn");
+    const sections = document.querySelectorAll(".admin-section");
+
+    buttons.forEach(button => {
+        button.addEventListener("click", () => {
+            const target = button.dataset.category;
+            sections.forEach(section => section.classList.remove("active"));
+            const targetSection = document.getElementById(target);
+            if (targetSection) targetSection.classList.add("active");
+        });
+    });
+
+    document.getElementById("rice-meals").classList.add("active");
+});
+</script>
+
+</body>
+</html>
